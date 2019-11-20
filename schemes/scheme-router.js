@@ -59,10 +59,11 @@ router.post('/', (req, res) => {
 });
 
 router.post('/:id/steps', (req, res) => {
-  const stepData = req.body;
+  let stepData = req.body;
   const { id } = req.params; 
-
-  Schemes.findById(id)
+  console.table(stepData)
+  stepData = {...stepData, 'scheme_id':id}
+  Schemes.addStep(stepData,id)
   .then(scheme => {
     if (scheme) {
       Schemes.addStep(stepData, id)
